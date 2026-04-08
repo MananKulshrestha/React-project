@@ -1,0 +1,253 @@
+/* src/App.css - COMPONENT AND PAGE SPECIFIC STYLES */
+
+/* --- Navbar Component --- */
+.navbar {
+    background-color: #1f1f1f;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    min-height: 54px;
+}
+
+.navbar span {
+    color: #bdbdbd;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.navbar span:hover, .navbar span.active {
+    color: #bb86fc;
+    text-shadow: 0 0 8px rgba(187, 134, 252, 0.4);
+}
+
+.nav-right-controls {
+    position: absolute;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    font-size: 22px; 
+    cursor: pointer;
+    transition: transform 0.3s;
+    padding: 0;
+}
+.theme-btn:hover { transform: scale(1.2); }
+
+.welcome-msg {
+    font-size: 18px;
+    font-weight: 800;
+    color: #bb86fc;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 900px) {
+    .navbar { flex-direction: column; padding: 15px 10px; }
+    .navbar span { display: inline-block; margin: 5px 10px; }
+    .nav-right-controls {
+        position: static;
+        margin-top: 15px;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+/* --- Footer Component --- */
+.footer {
+    background-color: #181818;
+    border-top: 1px solid #333;
+    padding: 25px 0;
+    margin-top: auto; 
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.footer-content {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links { display: flex; gap: 20px; }
+
+@media (max-width: 600px) {
+    .footer-content { flex-direction: column; gap: 15px; }
+}
+
+/* --- ImageCarousel Component --- */
+.carousel-container {
+    position: relative;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #111;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn { from { opacity: 0.4; } to { opacity: 1; } }
+
+
+/* --- SportCard Component & Grid --- */
+.sports-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 25px; 
+    margin-top: 30px; 
+}
+
+.sport-card { 
+    background: #252525; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
+    border: 1px solid #444; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.sport-card-img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.sport-card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 0; 
+    border: none; 
+    transition: transform 0.5s ease;
+}
+
+.sport-card-content {
+    padding: 15px 20px;
+    text-align: center;
+    background: #252525;
+    transition: background-color 0.3s;
+}
+
+.sport-card h3 { color: #e0e0e0; margin-top: 5px; margin-bottom: 10px; transition: color 0.3s ease; }
+
+.explore-btn {
+    font-size: 13px;
+    color: #03dac6;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.sport-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 10px 25px rgba(187, 134, 252, 0.2); 
+    border-color: #bb86fc; 
+}
+.sport-card:hover img { transform: scale(1.05); }
+.sport-card:hover h3 { color: #bb86fc; }
+.sport-card:hover .explore-btn { opacity: 1; }
+
+
+/* --- Sport Detail Page Specifics --- */
+.sport-detail-title { text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+.sport-text { font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; text-align: justify;}
+.sport-img-wrapper { text-align: center; margin: 40px 0; }
+.sport-detail-img { width: 80%; max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.back-btn-container { text-align: center; margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;}
+.back-btn { font-size: 1.1rem; font-weight: bold; }
+
+@media (max-width: 768px) {
+    .sport-detail-img { width: 100%; }
+}
+
+
+/* --- Forms & Validation (Login, Signup, Feedback) --- */
+.password-container { position: relative; display: flex; align-items: center; }
+.toggle-password { position: absolute; right: 12px; cursor: pointer; font-size: 18px; user-select: none; top: 18px; }
+
+.strength-meter { height: 6px; background-color: #444; border-radius: 3px; margin-top: -15px; margin-bottom: 20px; overflow: hidden; }
+.strength-bar { height: 100%; width: 0%; transition: width 0.3s ease, background-color 0.3s ease; }
+
+.drop-zone { border: 2px dashed #555; border-radius: 8px; padding: 25px; text-align: center; color: #bdbdbd; cursor: pointer; margin-bottom: 20px; background-color: #252525; transition: border-color 0.3s, background-color 0.3s; }
+.drop-zone:hover { border-color: #bb86fc; background-color: #2a2a2a; }
+
+.star-rating { font-size: 35px; cursor: pointer; margin-bottom: 15px; }
+.star-rating span { color: #444; transition: color 0.2s, transform 0.2s; display: inline-block;}
+.star-rating span:hover { transform: scale(1.2); }
+.star-rating span.active { color: #FFD700; }
+
+
+/* --- Assessment Component --- */
+.quiz-question { 
+    background: #252525; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    transition: background-color 0.3s; 
+    border-left: 4px solid #444;
+}
+.quiz-question:focus-within { border-left-color: #bb86fc; }
+
+.confetti { position: fixed; top: -10px; width: 10px; height: 10px; background-color: #bb86fc; border-radius: 50%; z-index: 9999; animation: fall linear forwards; }
+.confetti:nth-child(even) { background-color: #03dac6; border-radius: 0; }
+@keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+
+
+/* --- LIGHT MODE COMPONENT OVERRIDES --- */
+body.light-mode .navbar { background-color: #ffffff; border-bottom: 2px solid #ddd; }
+body.light-mode .navbar span { color: #555555; }
+body.light-mode .navbar span:hover, body.light-mode .navbar span.active { color: #9955e8; }
+body.light-mode .welcome-msg { color: #6200ea; }
+
+body.light-mode .footer { background-color: #ffffff; border-top-color: #ddd; color: #666; }
+
+body.light-mode .carousel-container { border-color: #ddd; background-color: #f9f9f9;}
+
+body.light-mode .sport-card { background-color: #ffffff; border-color: #e0e0e0; }
+body.light-mode .sport-card-content { background-color: #ffffff; }
+body.light-mode .sport-card h3 { color: #333; }
+body.light-mode .sport-card:hover { border-color: #6200ea; box-shadow: 0 10px 25px rgba(98, 0, 234, 0.15);}
+body.light-mode .sport-card:hover h3 { color: #6200ea; }
+
+body.light-mode .back-btn-container { border-top-color: #eee; }
+
+body.light-mode .drop-zone { background-color: #fafafa; border-color: #ccc; color: #666; }
+body.light-mode .drop-zone:hover { border-color: #6200ea; background-color: #f0f0f0;}
+body.light-mode .strength-meter { background-color: #e0e0e0; }
+
+body.light-mode .quiz-question { background: #fafafa; border: 1px solid #eee; border-left-color: #ccc;}
+body.light-mode .quiz-question:focus-within { border-left-color: #6200ea; }
