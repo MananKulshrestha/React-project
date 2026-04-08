@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import ImageCarousel from '../components/ImageCarousel';
 
 export default function Home() {
   const [text, setText] = useState('');
   const fullText = "Games Learning Center";
-  const [slide, setSlide] = useState(0);
-  const images = ["/home-banner.jpg", "/home-banner-2.jpg", "/home-banner-3.jpg"];
+  const bannerImages = ["/home-banner.jpg", "/home-banner-2.jpg", "/home-banner-3.jpg"];
 
   // Typing Effect using React useEffect
   useEffect(() => {
@@ -15,12 +15,6 @@ export default function Home() {
       i++;
       if (i >= fullText.length) clearInterval(timer);
     }, 100);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Carousel Effect
-  useEffect(() => {
-    const timer = setInterval(() => setSlide((s) => (s + 1) % images.length), 3000);
     return () => clearInterval(timer);
   }, []);
 
@@ -40,13 +34,8 @@ export default function Home() {
           </ul>
         </div>
         <div className="image-side">
-          <div style={{ position: 'relative', border: '2px solid #333', borderRadius: '6px', overflow: 'hidden' }}>
-            <img 
-              src={images[slide]} 
-              alt={`Slide ${slide}`} 
-              style={{ display: 'block', animation: 'fadeInSlideUp 0.8s ease-in-out' }} 
-            />
-          </div>
+          {/* Using the new reusable ImageCarousel component */}
+          <ImageCarousel images={bannerImages} interval={3500} />
         </div>
       </div>
     </div>

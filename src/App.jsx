@@ -3,9 +3,12 @@ import './App.css';
 
 // Components
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+// Pages
 import Home from './pages/Home';
 import Register from './pages/Register';
-import Learn from './pages/Learn';
+import Learn from './pages/learn';
 import SportDetail from './pages/SportDetail';
 import Assessment from './pages/Assessment';
 import Feedback from './pages/Feedback';
@@ -68,7 +71,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="app-wrapper">
       <Navbar 
         route={route} 
         navigate={navigate} 
@@ -78,8 +81,8 @@ function App() {
         handleLogout={handleLogout} 
       />
       
-      {/* Conditional Rendering equivalent to separate HTML files */}
-      <div className="container">
+      {/* main tag helps flexbox push the footer to the bottom */}
+      <main className="container">
         {route === 'home' && <Home />}
         {route === 'register' && <Register />}
         {route === 'learn' && <Learn navigate={navigate} />}
@@ -88,8 +91,10 @@ function App() {
         {route === 'feedback' && <Feedback />}
         {route === 'login' && <Login navigate={navigate} setUser={setUser} />}
         {route === 'signup' && <Signup navigate={navigate} />}
-      </div>
-    </>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
 
