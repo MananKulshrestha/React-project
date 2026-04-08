@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
 
+// --- Cookie Helper Function ---
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
 export default function Signup({ navigate }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -36,8 +44,10 @@ export default function Signup({ navigate }) {
       setTimeout(() => setShake(false), 500);
       return;
     }
-    localStorage.setItem('registeredUser', username);
-    localStorage.setItem('registeredPass', password);
+    // Save credentials to cookies
+    setCookie('registeredUser', username, 7);
+    setCookie('registeredPass', password, 7);
+    
     alert('Account created successfully! Please login.');
     navigate('login');
   };

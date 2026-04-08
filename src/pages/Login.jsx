@@ -1,5 +1,29 @@
 import { useState } from 'react';
 
+// --- Cookie Helper Functions ---
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  const cookieName = name + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+  for(let i = 0; i < cookieArray.length; i++) {
+    let c = cookieArray[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(cookieName) === 0) {
+      return c.substring(cookieName.length, c.length);
+    }
+  }
+  return "";
+}
+
 export default function Login({ navigate, setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -9,11 +33,11 @@ export default function Login({ navigate, setUser }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem('registeredUser');
-    const storedPass = localStorage.getItem('registeredPass');
+    const storedUser = getCookie('registeredUser');
+    const storedPass = getCookie('registeredPass');
 
-    if (username === storedUser && password === storedPass) {
-      localStorage.setItem('loggedInUser', username);
+    if (username === storedUser && password === storedPass && storedUser !== "") {
+      setCookie('loggedInUser', username, 7); // Save session for 7 days
       setUser(username);
       navigate('home');
     } else {
