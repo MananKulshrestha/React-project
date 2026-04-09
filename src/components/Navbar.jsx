@@ -1,6 +1,6 @@
 export default function Navbar({ route, navigate, theme, setTheme, user, handleLogout }) {
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
+//navbar
   return (
     <div className="navbar">
       <span className={route === 'home' ? 'active' : ''} onClick={() => navigate('home')}>Home</span>
