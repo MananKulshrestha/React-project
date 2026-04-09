@@ -1,4 +1,4 @@
-import SportsCard from '../components/SportsCard';
+import SportsCard from '../components/SportCard';
 
 export default function Learn({ navigate }) {
   const sports = ['cricket', 'football', 'basketball', 'tennis', 'badminton', 'hockey'];
