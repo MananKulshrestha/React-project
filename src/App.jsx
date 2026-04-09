@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import './App.css';
 
 // Components
@@ -40,9 +41,7 @@ function getCookie(name) {
 }
 
 function App() {
-  // State for manual routing (React Conditionals)
-  const [route, setRoute] = useState('home');
-  const [activeSport, setActiveSport] = useState(null);
+  const navigate = useNavigate();
 
   // State for Authentication and Theme using Cookies
   const [user, setUser] = useState(getCookie('loggedInUser') || '');
@@ -58,23 +57,15 @@ function App() {
     setCookie('theme', theme, 365);
   }, [theme]);
 
-  // Handle routing logic safely
-  const navigate = (path, context = null) => {
-    if (context) setActiveSport(context);
-    setRoute(path);
-  };
-
   const handleLogout = () => {
     setCookie('loggedInUser', '', -1); // Deletes the cookie by expiring it
     setUser('');
-    setRoute('home');
+    navigate('/'); // Redirect to home using React Router
   };
 
   return (
     <div className="app-wrapper">
       <Navbar 
-        route={route} 
-        navigate={navigate} 
         theme={theme} 
         setTheme={setTheme} 
         user={user} 
@@ -83,14 +74,19 @@ function App() {
       
       {/* main tag helps flexbox push the footer to the bottom */}
       <main className="container">
-        {route === 'home' && <Home />}
-        {route === 'register' && <Register />}
-        {route === 'learn' && <Learn navigate={navigate} />}
-        {route === 'sport' && <SportDetail sport={activeSport} navigate={navigate} />}
-        {route === 'assessment' && <Assessment />}
-        {route === 'feedback' && <Feedback />}
-        {route === 'login' && <Login navigate={navigate} setUser={setUser} />}
-        {route === 'signup' && <Signup navigate={navigate} />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/learn" element={<Learn />} />
+          {/* URL Parameter for dynamic sport matching */}
+          <Route path="/sport/:sportName" element={<SportDetail />} />
+          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* Catch-all fallback to redirect bad URLs to Home */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </main>
 
       <Footer />

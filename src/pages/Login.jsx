@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 // --- Cookie Helper Functions ---
 function setCookie(name, value, days) {
@@ -24,7 +25,8 @@ function getCookie(name) {
   return "";
 }
 
-export default function Login({ navigate, setUser }) {
+export default function Login({ setUser }) {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +41,7 @@ export default function Login({ navigate, setUser }) {
     if (username === storedUser && password === storedPass && storedUser !== "") {
       setCookie('loggedInUser', username, 7); // Save session for 7 days
       setUser(username);
-      navigate('home');
+      navigate('/');
     } else {
       setError('Invalid username or password!');
       setShake(true);
@@ -68,7 +70,7 @@ export default function Login({ navigate, setUser }) {
             <button type="submit" className="submit-btn" style={{ width: '100%' }}>Login</button>
           </form>
           <p style={{ textAlign: 'center', marginTop: '20px' }}>
-            Don't have an account? <span className="link" onClick={() => navigate('signup')}>Sign Up here</span>
+            Don't have an account? <Link to="/signup" className="link">Sign Up here</Link>
           </p>
         </div>
         <div className="image-side">

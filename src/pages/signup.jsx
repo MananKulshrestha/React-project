@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 // --- Cookie Helper Function ---
 function setCookie(name, value, days) {
@@ -8,7 +9,8 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-export default function Signup({ navigate }) {
+export default function Signup() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +51,7 @@ export default function Signup({ navigate }) {
     setCookie('registeredPass', password, 7);
     
     alert('Account created successfully! Please login.');
-    navigate('login');
+    navigate('/login');
   };
 
   return (
@@ -92,7 +94,7 @@ export default function Signup({ navigate }) {
         <button type="submit" className="submit-btn" style={{ width: '100%' }}>Sign Up</button>
       </form>
       <p style={{ textAlign: 'center', marginTop: '20px' }}>
-        Already have an account? <span className="link" onClick={() => navigate('login')}>Login here</span>
+        Already have an account? <Link to="/login" className="link">Login here</Link>
       </p>
     </div>
   );

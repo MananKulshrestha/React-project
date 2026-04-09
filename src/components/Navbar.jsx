@@ -1,16 +1,18 @@
-export default function Navbar({ route, navigate, theme, setTheme, user, handleLogout }) {
+import { NavLink } from 'react-router-dom';
+
+export default function Navbar({ theme, setTheme, user, handleLogout }) {
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-//navbar
+
   return (
     <div className="navbar">
-      <span className={route === 'home' ? 'active' : ''} onClick={() => navigate('home')}>Home</span>
-      <span className={route === 'register' ? 'active' : ''} onClick={() => navigate('register')}>Course Registration</span>
-      <span className={route === 'learn' ? 'active' : ''} onClick={() => navigate('learn')}>Course Learning</span>
-      <span className={route === 'assessment' ? 'active' : ''} onClick={() => navigate('assessment')}>Assessment</span>
-      <span className={route === 'feedback' ? 'active' : ''} onClick={() => navigate('feedback')}>Feedback</span>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/register">Course Registration</NavLink>
+      <NavLink to="/learn">Course Learning</NavLink>
+      <NavLink to="/assessment">Assessment</NavLink>
+      <NavLink to="/feedback">Feedback</NavLink>
       
       {!user && (
-        <span className={route === 'login' ? 'active' : ''} onClick={() => navigate('login')}>Login</span>
+        <NavLink to="/login">Login</NavLink>
       )}
 
       <div className="nav-right-controls">
@@ -21,7 +23,8 @@ export default function Navbar({ route, navigate, theme, setTheme, user, handleL
         {user && (
           <>
             <span className="welcome-msg">Welcome, {user}!</span>
-            <span onClick={handleLogout}>Logout</span>
+            {/* Kept as a span because it triggers an action, not a navigation route */}
+            <span onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</span>
           </>
         )}
       </div>

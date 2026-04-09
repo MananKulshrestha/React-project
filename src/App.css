@@ -16,7 +16,7 @@
     min-height: 54px;
 }
 
-.navbar span {
+.navbar span, .navbar a {
     color: #bdbdbd;
     text-decoration: none;
     margin: 0 15px;
@@ -26,7 +26,8 @@
     transition: color 0.3s, text-shadow 0.3s;
 }
 
-.navbar span:hover, .navbar span.active {
+.navbar span:hover, .navbar span.active,
+.navbar a:hover, .navbar a.active {
     color: #bb86fc;
     text-shadow: 0 0 8px rgba(187, 134, 252, 0.4);
 }
@@ -58,7 +59,7 @@
 
 @media (max-width: 900px) {
     .navbar { flex-direction: column; padding: 15px 10px; }
-    .navbar span { display: inline-block; margin: 5px 10px; }
+    .navbar span, .navbar a { display: inline-block; margin: 5px 10px; }
     .nav-right-controls {
         position: static;
         margin-top: 15px;
@@ -229,8 +230,9 @@
 
 /* --- LIGHT MODE COMPONENT OVERRIDES --- */
 body.light-mode .navbar { background-color: #ffffff; border-bottom: 2px solid #ddd; }
-body.light-mode .navbar span { color: #555555; }
-body.light-mode .navbar span:hover, body.light-mode .navbar span.active { color: #9955e8; }
+body.light-mode .navbar span, body.light-mode .navbar a { color: #555555; }
+body.light-mode .navbar span:hover, body.light-mode .navbar span.active,
+body.light-mode .navbar a:hover, body.light-mode .navbar a.active { color: #9955e8; }
 body.light-mode .welcome-msg { color: #6200ea; }
 
 body.light-mode .footer { background-color: #ffffff; border-top-color: #ddd; color: #666; }

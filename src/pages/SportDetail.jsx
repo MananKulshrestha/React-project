@@ -1,3 +1,5 @@
+import { useParams, useNavigate } from 'react-router-dom';
+
 // Expanded data store with detailed, multi-paragraph content and interleaved images
 const sportData = {
   cricket: {
@@ -50,9 +52,12 @@ const sportData = {
   }
 };
 
-export default function SportDetail({ sport, navigate }) {
+export default function SportDetail() {
+  const { sportName } = useParams(); // Fetch the sport from the URL
+  const navigate = useNavigate();
+
   // Fallback data if a sport isn't found
-  const data = sportData[sport] || { 
+  const data = sportData[sportName] || { 
     title: 'Sport Not Found', 
     text1: 'Details coming soon.', 
     img1: null, text2: '', img2: null, text3: '' 
@@ -83,7 +88,7 @@ export default function SportDetail({ sport, navigate }) {
       </div>
       
       <div className="back-btn-container">
-        <span className="link back-btn" onClick={() => navigate('learn')}>&larr; Back to Courses</span>
+        <span className="link back-btn" onClick={() => navigate('/learn')}>&larr; Back to Courses</span>
       </div>
     </div>
   );

@@ -1,10 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import SportsCard from '../components/SportCard';
 
-export default function Learn({ navigate }) {
+export default function Learn() {
+  const navigate = useNavigate();
   const sports = ['cricket', 'football', 'basketball', 'tennis', 'badminton', 'hockey'];
 
   const handleCardClick = (sportName) => {
-    navigate('sport', sportName);
+    // Navigate dynamically using the URL structure defined in App.jsx
+    navigate(`/sport/${sportName}`);
   };
 
   return (
